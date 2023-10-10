@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.SpringBootBegining5.Entity.Marks;
 import com.example.SpringBootBegining5.Entity.Result;
 import com.example.SpringBootBegining5.Entity.Student;
+import com.example.SpringBootBegining5.Entity.Teacher;
 import com.example.SpringBootBegining5.Repsitory.StudentRepository;
 import com.example.SpringBootBegining5.ServiceImpl.ServiceImpl;
 
@@ -88,6 +89,14 @@ public class Controller {
 		System.out.println(student);
 		serviceImpl.saveStudent(student);
 		return new ResponseEntity<String>("Student Inserted", HttpStatus.OK);
+	}
+	
+	@PostMapping(value="/teacherEntity")
+	public ResponseEntity<String> saveTeacher(@RequestBody Teacher teacher) 
+	{
+		System.out.println(teacher);
+		serviceImpl.saveTeacher(teacher);
+		return new ResponseEntity<String>("Teacher Inserted", HttpStatus.OK);
 	}
 	
 	@PostMapping(value="/students/{studentId}/marks/{marksId}/resultEntity")

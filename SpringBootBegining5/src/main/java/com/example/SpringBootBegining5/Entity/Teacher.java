@@ -1,66 +1,69 @@
 package com.example.SpringBootBegining5.Entity;
 
-import java.util.Collection;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 //import com.example.SpringBootBegining5.Repsitory.TeacherRepository;
 
-public class Teacher implements UserDetails{
+@Entity
+public class Teacher {
 	
-//	@Autowired
-//	private TeacherRepository teacherRepository;
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Teacher() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public String getPassword() {
-		
-		return null;
+	public Teacher(String teacherUsername, int teacherId, String teacherName, String teacherPassword,
+			String studentMobile) {
+		super();
+		this.teacherUsername = teacherUsername;
+		this.teacherId = teacherId;
+		this.teacherName = teacherName;
+		this.teacherPassword = teacherPassword;
+		this.studentMobile = studentMobile;
 	}
-
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
+	@Id
+	private String teacherUsername;
+	private int teacherId;
+	private String teacherName;
+	private String teacherPassword;
+	private String studentMobile;
+	public String getTeacherUsername() {
+		return teacherUsername;
 	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
+	public void setTeacherUsername(String teacherUsername) {
+		this.teacherUsername = teacherUsername;
 	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
+	public int getTeacherId() {
+		return teacherId;
 	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
+	public void setTeacherId(int teacherId) {
+		this.teacherId = teacherId;
 	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+	public String getTeacherName() {
+		return teacherName;
 	}
-
-//	public TeacherRepository getTeacherRepository() {
-//		return teacherRepository;
-//	}
-//
-//	public void setTeacherRepository(TeacherRepository teacherRepository) {
-//		this.teacherRepository = teacherRepository;
-//	}
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+	public String getTeacherPassword() {
+		return teacherPassword;
+	}
+	public void setTeacherPassword(String teacherPassword) {
+		this.teacherPassword = teacherPassword;
+	}
+	public String getStudentMobile() {
+		return studentMobile;
+	}
+	public void setStudentMobile(String studentMobile) {
+		this.studentMobile = studentMobile;
+	}
+	@Override
+	public String toString() {
+		return "Teacher [teacherUsername=" + teacherUsername + ", teacherId=" + teacherId + ", teacherName="
+				+ teacherName + ", teacherPassword=" + teacherPassword + ", studentMobile=" + studentMobile + "]";
+	}
 
 }

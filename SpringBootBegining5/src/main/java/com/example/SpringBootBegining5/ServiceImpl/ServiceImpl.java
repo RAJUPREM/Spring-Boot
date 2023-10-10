@@ -13,10 +13,12 @@ import com.example.SpringBootBegining5.Entity.Address;
 import com.example.SpringBootBegining5.Entity.Marks;
 import com.example.SpringBootBegining5.Entity.Result;
 import com.example.SpringBootBegining5.Entity.Student;
+import com.example.SpringBootBegining5.Entity.Teacher;
 //import com.example.SpringBootBegining5.Repsitory.AddressRepository;
 import com.example.SpringBootBegining5.Repsitory.MarksRepository;
 import com.example.SpringBootBegining5.Repsitory.ResultRepository;
 import com.example.SpringBootBegining5.Repsitory.StudentRepository;
+import com.example.SpringBootBegining5.Repsitory.TeacherRepository;
 import com.example.SpringBootBegining5.Service.ServiceReq;
 
 
@@ -36,8 +38,8 @@ public class ServiceImpl implements ServiceReq{
 	@Autowired
 	private StudentRepository studentRepository;
 	
-//	@Autowired
-//	private AddressRepository addressRepository;
+	@Autowired
+	private TeacherRepository teacherRepository;
 	
 	@Autowired
 	private MarksRepository marksRepository;
@@ -93,7 +95,10 @@ public class ServiceImpl implements ServiceReq{
 	}
 	
 	
-
+	@Override
+	public void saveTeacher(Teacher teacher) {
+		teacherRepository.save(teacher);
+	}
 	
 
 	@Override
@@ -223,6 +228,16 @@ public class ServiceImpl implements ServiceReq{
 	public void setMarksRepository(MarksRepository marksRepository) {
 		this.marksRepository = marksRepository;
 	}
+
+	public TeacherRepository getTeacherRepository() {
+		return teacherRepository;
+	}
+
+	public void setTeacherRepository(TeacherRepository teacherRepository) {
+		this.teacherRepository = teacherRepository;
+	}
+
+	
 
 	
 

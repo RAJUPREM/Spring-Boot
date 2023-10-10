@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import com.example.SpringBootBegining5.Entity.Marks;
 import com.example.SpringBootBegining5.Entity.Result;
 import com.example.SpringBootBegining5.Entity.Student;
+import com.example.SpringBootBegining5.Entity.Teacher;
 
 public interface ServiceReq {
 	
@@ -39,6 +40,8 @@ public interface ServiceReq {
 	
 	
 	public Student getStudentByResultId(int resultId);
+	
+	public void saveTeacher(Teacher teacher);
 	
 	
 	

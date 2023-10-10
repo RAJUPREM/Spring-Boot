@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.SpringBootBegining5.Entity.Teacher;
 
-//@Repository
-//public interface TeacherRepository extends JpaRepository<Teacher,String>{
-//
-//}
+@Repository
+public interface TeacherRepository extends JpaRepository<Teacher,String>{
+
+}
