@@ -25,26 +25,26 @@ public class CustomTeacherDetailsService implements UserDetailsService{
 //		Optional<Teacher> tempTeacher=teacherRepository.findById(teacherName);
 //		Teacher teacher=tempTeacher.get();
 		
-//		if(teacherUsername.equals("Apurba"))
-//		{
-//			return new User("Apurba","Apurba@1234",new ArrayList<>());
-//		}
-//		else
-//		{
-//			throw new UsernameNotFoundException("Teacher does not present");
-//		}
-		
-		try {
-		Optional<Teacher> tempTeacher=teacherRepository.findById(teacherUsername);
-		Teacher teacher=tempTeacher.get();
-		
-		return new User(teacher.getTeacherUsername(),teacher.getTeacherPassword(),new ArrayList<>());
-		}
-		catch(UsernameNotFoundException unf)
+		if(teacherUsername.equals("Apurba"))
 		{
-			unf.printStackTrace();
+			return new User("Apurba","Apurba@1234",new ArrayList<>());
 		}
-		return null;
+		else
+		{
+			throw new UsernameNotFoundException("Teacher does not present");
+		}
+		
+//		try {
+//		Optional<Teacher> tempTeacher=teacherRepository.findById(teacherUsername);
+//		Teacher teacher=tempTeacher.get();
+//		
+//		return new User(teacher.getTeacherUsername(),teacher.getTeacherPassword(),new ArrayList<>());
+//		}
+//		catch(UsernameNotFoundException unf)
+//		{
+//			unf.printStackTrace();
+//		}
+//		return null;
 		
 		
 	}

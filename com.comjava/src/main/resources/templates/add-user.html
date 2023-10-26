@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <head>
+<title>Add User</title> </head>
+<body>
+<h1>Add User</h1>
+<form th:action="@{/add}" th:object="${user}" method="post" onsubmit="return validateAmount()">
+<label for="firstName">First Name:</label>
+<input type="text" id="firstName" th:field="*{firstName}" required/><br/>
+<label for="lastName">Last Name:</label>
+<input type="text" id="lastName" th:field="*{lastName}" required/><br/>
+<label for="phoneNumber">Phone Number:</label>
+<input type="text" id="phoneNumber" th:field="*{phoneNumber}" required/><br/>
+<label for="address">Address:</label>
+<input type="text" id="address" th:field="*{address}" required/><br/>
+<label for="amount">Amount:</label>
+<input type="number" id="amount" th:field="*{amount}" required/><br/> <p id="errorText" style="color: red;"></p>
+<button type="submit">Add User</button> </form>
+
+</body> </html>
