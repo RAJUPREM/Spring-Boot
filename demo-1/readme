@@ -1,0 +1,14 @@
+Please find your assignment for Spring Rest, Spring Boot, and Spring Security
+Using Spring boot create Rest API and also add the Spring security. This is a task management requirement.
+1) Create Spring Rest APT which will have data of the employees and will have one Manager's data.
+2) Each Employee and Manager will have fields First Name, Last Name, Employee ID, Start Date End Date, Task Name, Access right
+3) Create some tasks using Spring Rest and the task will have the task name and task ID
+4) The manager can add a task to each employee and the manager will have access rights as Y and the remaining employee will have the access rights as N
+5) Manager can view, update, and delete tasks for each employee
+5 Employee can only view task
+7) Add spring security to the manager authentication and employee authentication.
+8)Use the JSP page to display the employee details
+9) Manager login will be able to get task details and add tasks to the employee.
+10) If manager login is adding a task other than the task declared in the Rest API it should throw an error.
+
+Use Postman to check Spring Rest data.
