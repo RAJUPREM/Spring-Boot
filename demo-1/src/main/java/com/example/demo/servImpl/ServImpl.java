@@ -1,5 +1,6 @@
 package com.example.demo.servImpl;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +87,7 @@ UserEntity tempUserEntity=new UserEntity();
 
 	@Override
 	public String addTaskToEmployee(int taskId, int empUserEntityId,int manUserEntityId) {
+		try {
 		Optional<UserEntity> tempEmpUserEntity=userEntityReposiotry.findById(empUserEntityId);
 		UserEntity empUserEntity=tempEmpUserEntity.get();
 		
@@ -112,6 +114,11 @@ UserEntity tempUserEntity=new UserEntity();
 		else
 		{
 			return "This is not employee";
+		}
+		}
+		catch(NoSuchElementException noSuchElementException)
+		{
+			return "No such data is present";
 		}
 		
 		
