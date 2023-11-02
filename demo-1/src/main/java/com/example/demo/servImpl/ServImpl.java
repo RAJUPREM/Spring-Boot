@@ -1,5 +1,7 @@
 package com.example.demo.servImpl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Task;
+import com.example.demo.entity.TaskAddEmployee;
 import com.example.demo.entity.TaskReq;
 import com.example.demo.entity.UserEntity;
 import com.example.demo.entity.UserEntityReq;
@@ -122,6 +125,99 @@ UserEntity tempUserEntity=new UserEntity();
 		}
 		
 		
+		
+	}
+
+	@Override
+	public List<Task> getAllTask() {
+		List<Task> ltask=taskRepository.findAll();
+		return ltask;
+	}
+
+	@Override
+	public List<Task> getTaskByEmployeeId(int userEntityId) {
+		List<Task> lTask=taskRepository.findAll();
+		
+		List<Task> lTaskEmp=new ArrayList<Task>();
+		
+		for(Task t:lTask)
+		{
+			if(t.getUserEntity().getUserEntityId()==userEntityId)
+			{
+				lTaskEmp.add(t);
+			}
+		}
+		
+		
+		return lTaskEmp;
+	}
+
+	@Override
+	public void deleteTaskOfEmpByEmpId(TaskAddEmployee taskAddEmployee) {
+		
+		Optional<UserEntity> tempEmpUserEntity=userEntityReposiotry.findById(taskAddEmployee.getEmpUserEntityId());
+		UserEntity empUserEntity=tempEmpUserEntity.get();
+		
+		Optional<UserEntity> tempManUserEntity=userEntityReposiotry.findById(taskAddEmployee.getManUserEntityId());
+		UserEntity manUserEntity=tempManUserEntity.get();
+		
+		List<Task> lTask=taskRepository.findAll();
+		
+		List<Task> lTaskEmp=new ArrayList<Task>();
+		
+		if(manUserEntity.getAccessRight().equals("Y"))
+		{
+		for(Task t:lTask)
+		{
+			if(t.getUserEntity().getUserEntityId()==taskAddEmployee.getEmpUserEntityId() && t.getTaskId()==taskAddEmployee.getTaskId())
+			{
+				t.setUserEntity(null);
+				taskRepository.save(t);
+			}
+		}
+
+	}
+	}
+
+	@Override
+	public Task updateTaskOfEmpByEmpId(int userEntityId,int changedEmp,int managerId, TaskReq taskReq) {
+		
+		Optional<UserEntity> tempManUserEntity=userEntityReposiotry.findById(managerId);
+		UserEntity manUserEntity=tempManUserEntity.get();
+		
+		List<Task> lTask=taskRepository.findAll();
+		
+		List<Task> lTaskEmp=new ArrayList<Task>();
+		
+		if(manUserEntity.getAccessRight().equals("Y"))
+		{
+		for(Task t:lTask)
+		{
+			if(t.getUserEntity()!=null)
+			{
+			if(t.getUserEntity().getUserEntityId()==userEntityId && t.getTaskId()==taskReq.getTaskId())
+			{
+				t.setTaskName(taskReq.getTaskName());
+				Optional<UserEntity> tempUserEntity=userEntityReposiotry.findById(changedEmp);
+				UserEntity userEntity=tempUserEntity.get();
+				t.setUserEntity(userEntity);
+				taskRepository.save(t);
+				return t;
+			}
+			}
+//			else if
+//			{
+//				t.setTaskName(taskReq.getTaskName());
+//				Optional<UserEntity> tempUserEntity=userEntityReposiotry.findById(changedEmp);
+//				UserEntity userEntity=tempUserEntity.get();
+//				t.setUserEntity(userEntity);
+//				taskRepository.save(t);
+//				return t;
+//			}
+		}
+		}
+		
+		return null;
 		
 	}
 

@@ -1,11 +1,15 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -71,6 +75,32 @@ public class UserContoller {
 		String res=servImpl.addTaskToEmployee(taskAddEmployee.getTaskId(), taskAddEmployee.getEmpUserEntityId(), taskAddEmployee.getManUserEntityId());
 		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
+	
+	@GetMapping("/getTask")
+	public ResponseEntity<List<Task>> getAllTask()
+	{
+		List<Task> ltask=servImpl.getAllTask();
+		return new ResponseEntity<List<Task>>(ltask,HttpStatus.OK);
+	}
+	
+	@GetMapping("/getTaskByEmp/{employeeId}")
+	public ResponseEntity<List<Task> > getTaskByEmployeeId(@PathVariable("employeeId") int employeeId)
+	{
+		List<Task> lTask=servImpl.getTaskByEmployeeId(employeeId);
+		return new ResponseEntity<List<Task> >(lTask,HttpStatus.OK);
+	}
+	
+	
+	@DeleteMapping("/deleteTaskOfEmpByEmpId")
+	public void deleteTaskOfEmpByEmpId(@RequestBody TaskAddEmployee taskAddEmployee)
+	{
+		servImpl.deleteTaskOfEmpByEmpId(taskAddEmployee);
+	}
 
-
+	@PutMapping("/getEmployee/{employeeId}/{changedEmpId}/{managerId}")
+	public ResponseEntity<Task> updateTaskOfEmpByEmpId(@PathVariable("employeeId") int employeeId,@PathVariable("changedEmpId") int changedEmpId,@PathVariable("managerId") int managerId,@RequestBody TaskReq taskReq)
+	{
+		Task task=servImpl.updateTaskOfEmpByEmpId(employeeId, changedEmpId,managerId, taskReq);
+		return new ResponseEntity<Task>(task,HttpStatus.OK);
+	}
 }
