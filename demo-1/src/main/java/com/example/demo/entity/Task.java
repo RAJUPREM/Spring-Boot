@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class Task {
 	private String taskName;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
+	@JsonManagedReference
 	private UserEntity userEntity;
 
 	public int getTaskId() {

@@ -10,7 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Task;
+import com.example.demo.entity.TaskAddEmployee;
+import com.example.demo.entity.TaskReq;
+import com.example.demo.entity.TaskReq;
 import com.example.demo.entity.UserEntity;
+import com.example.demo.entity.UserEntityReq;
 import com.example.demo.servImpl.ServImpl;
 
 @RestController
@@ -21,15 +26,22 @@ public class UserContoller {
 	ServImpl servImpl;
 	
 	@PostMapping("/createEmployee")
-	public void createEmployee(@RequestBody UserEntity userEntity)
+	public void createEmployee(@RequestBody UserEntityReq userEntityReq)
 	{
-		servImpl.createEmployee(userEntity);
+		servImpl.createEmployee(userEntityReq);
 	}
 	
-	@PostMapping("/createManager")
-	public void createManager(@RequestBody UserEntity userEntity)
+	@PostMapping("/createTask")
+	public void createTask(@RequestBody TaskReq taskReq)
 	{
-		servImpl.createManager(userEntity);
+		servImpl.createTask(taskReq);
+	}
+	
+	
+	@PostMapping("/createManager")
+	public void createManager(@RequestBody UserEntityReq userEntityReq)
+	{
+		servImpl.createManager(userEntityReq);
 	}
 	
 	@GetMapping("/getEmployee/{employeeId}")
@@ -39,11 +51,26 @@ public class UserContoller {
 		return new ResponseEntity<UserEntity>(userEntity,HttpStatus.OK);
 	}
 	
+	@GetMapping("/getTask/{taskId}")
+	public ResponseEntity<Task> getTask(@PathVariable("taskId") int taskId)
+	{
+		Task task=servImpl.getTask(taskId);
+		return new ResponseEntity<Task>(task,HttpStatus.OK);
+	}
+	
 	@GetMapping("/getManager/{managerId}")
 	public ResponseEntity<UserEntity> getManager(@PathVariable("managerId") int managerId)
 	{
 		UserEntity userEntity=servImpl.getManager(managerId);
 		return new ResponseEntity<UserEntity>(userEntity,HttpStatus.OK);
 	}
+	
+	@PostMapping("/addTaskToEmployee")
+	public ResponseEntity<String> addTaskToEmployee(@RequestBody TaskAddEmployee taskAddEmployee)
+	{
+		String res=servImpl.addTaskToEmployee(taskAddEmployee.getTaskId(), taskAddEmployee.getEmpUserEntityId(), taskAddEmployee.getManUserEntityId());
+		return new ResponseEntity<>(res,HttpStatus.OK);
+	}
+
 
 }

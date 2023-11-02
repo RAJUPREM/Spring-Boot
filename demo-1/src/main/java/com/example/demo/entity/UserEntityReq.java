@@ -1,37 +1,26 @@
 package com.example.demo.entity;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-
-@Entity
-public class UserEntity {
+public class UserEntityReq {
 	
-	
-	public UserEntity() {
+	public UserEntityReq() {
 		super();
 	}
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	public UserEntityReq(int userEntityId, String firstName, String lastName, String startDate, String endDate,
+			String accessRight) {
+		super();
+		this.userEntityId = userEntityId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.accessRight = accessRight;
+	}
 	private int userEntityId;
 	private String firstName;
 	private String lastName;
 	private String startDate;
 	private String endDate;
 	private String accessRight;
-	
-	
-	@OneToMany(mappedBy="userEntity")
-	@JsonBackReference
-	private List<Task> ltask;
-	
 	public int getUserEntityId() {
 		return userEntityId;
 	}
@@ -62,12 +51,16 @@ public class UserEntity {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	
 	public String getAccessRight() {
 		return accessRight;
 	}
 	public void setAccessRight(String accessRight) {
 		this.accessRight = accessRight;
+	}
+	@Override
+	public String toString() {
+		return "UserEntityReq [userEntityId=" + userEntityId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", startDate=" + startDate + ", endDate=" + endDate + ", accessRight=" + accessRight + "]";
 	}
 	
 
