@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Marks {
 	
 	
-	public Marks(int marksId, int maths, int science, int sst, int hindi, int english) {
+	public Marks(int marksId, int maths, int science, int sst, int hindi, int english, int computer) {
 		super();
 		this.marksId = marksId;
 		this.maths = maths;
@@ -17,7 +17,9 @@ public class Marks {
 		this.sst = sst;
 		this.hindi = hindi;
 		this.english = english;
+		this.computer = computer;
 	}
+	
 	public Marks() {
 		super();
 		
@@ -31,6 +33,13 @@ public class Marks {
 	private int sst;
 	private int hindi;
 	private int english;
+	private int computer;
+	public int getMarksId() {
+		return marksId;
+	}
+	public void setMarksId(int marksId) {
+		this.marksId = marksId;
+	}
 	public int getMaths() {
 		return maths;
 	}
@@ -61,17 +70,18 @@ public class Marks {
 	public void setEnglish(int english) {
 		this.english = english;
 	}
-	
-	public int getmarksId() {
-		return marksId;
+	public int getComputer() {
+		return computer;
 	}
-	public void setmarksId(int marksId) {
-		this.marksId = marksId;
+	public void setComputer(int computer) {
+		this.computer = computer;
 	}
 	@Override
 	public String toString() {
 		return "Marks [marksId=" + marksId + ", maths=" + maths + ", science=" + science + ", sst=" + sst + ", hindi="
-				+ hindi + ", english=" + english + "]";
+				+ hindi + ", english=" + english + ", computer=" + computer + "]";
 	}
+	
+	
 
 }

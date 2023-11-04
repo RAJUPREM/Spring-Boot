@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -15,14 +16,15 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class Student {
 
-	public Student(int studentId, String studentName, String studentRoll, String studentMobile, String className,
+	
+	public Student(int studentId, String studentName, String studentRoll, String studentMobile, SchoolClass schoolClass,
 			Result result, Address address) {
 		super();
 		this.studentId = studentId;
 		this.studentName = studentName;
 		this.studentRoll = studentRoll;
 		this.studentMobile = studentMobile;
-		this.className = className;
+		this.schoolClass = schoolClass;
 		this.result = result;
 		this.address = address;
 	}
@@ -39,7 +41,9 @@ public class Student {
 	private String studentMobile;
 	
 	
-	private String className;
+	@ManyToOne
+	@JsonManagedReference
+	private SchoolClass schoolClass;
 	
 	
 	@JsonManagedReference
@@ -49,7 +53,6 @@ public class Student {
 	//@OneToOne(cascade=CascadeType.ALL)
 	@Embedded
 	private Address address;
-
 	public int getStudentId() {
 		return studentId;
 	}
@@ -74,11 +77,11 @@ public class Student {
 	public void setStudentMobile(String studentMobile) {
 		this.studentMobile = studentMobile;
 	}
-	public Address getAddress() {
-		return address;
+	public SchoolClass getSchoolClass() {
+		return schoolClass;
 	}
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setSchoolClass(SchoolClass schoolClass) {
+		this.schoolClass = schoolClass;
 	}
 	public Result getResult() {
 		return result;
@@ -86,18 +89,20 @@ public class Student {
 	public void setResult(Result result) {
 		this.result = result;
 	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 	@Override
 	public String toString() {
 		return "Student [studentId=" + studentId + ", studentName=" + studentName + ", studentRoll=" + studentRoll
-				+ ", studentMobile=" + studentMobile + ", className=" + className + ", result=" + result.toString() + ", address="
-				+ address + "]";
+				+ ", studentMobile=" + studentMobile + ", schoolClass=" + schoolClass + ", result=" + result
+				+ ", address=" + address + "]";
 	}
-	public String getClassName() {
-		return className;
-	}
-	public void setClassName(String className) {
-		this.className = className;
-	}
+
+	
 	
 	
 

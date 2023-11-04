@@ -150,38 +150,38 @@ public class ServiceImpl implements ServiceReq{
 		this.resultRepository = resultRepository;
 	}
 
-	@Override
-	public Map<Integer,String>  getClassResult(String className) {
-		 
-			List<Result> lresult=new ArrayList<Result>();
-			lresult=resultRepository.findAll();
-			//List<Student> lstu=studentRepository.findAll();
-	
-			//Map<Integer,String> lstu=new LinkedHashMap<Integer,String>();
-			
-			Map<Integer,String> lhm=new LinkedHashMap<Integer,String>();
-			
-			for(Result tempResult:lresult)
-			{
-				if(tempResult.getPercentage()>32 && tempResult.getStudent().getClassName().equals(className))
-				{
-					//lstu.put(tempResult.getStudent().getStudentId(), tempResult.getStudent().getStudentName());
-//					System.out.println(tempResult.getStudent());
-//					System.out.println(tempResult.getStudent().getClass());
-					lhm.put(tempResult.getStudent().getStudentId(), "Pass");
-				}
-				else if(tempResult.getPercentage()<32 && tempResult.getStudent().getClassName().equals(className))
-				{
-					//lstu.put(tempResult.getStudent().getStudentId(), tempResult.getStudent().getStudentName());
-					lhm.put(tempResult.getStudent().getStudentId(), "Fail");
-				}
-				
-			}
-			
-			return lhm;
-		
-		
-	}
+//	@Override
+//	public Map<Integer,String>  getClassResult(String className) {
+//		 
+//			List<Result> lresult=new ArrayList<Result>();
+//			lresult=resultRepository.findAll();
+//			//List<Student> lstu=studentRepository.findAll();
+//	
+//			//Map<Integer,String> lstu=new LinkedHashMap<Integer,String>();
+//			
+//			Map<Integer,String> lhm=new LinkedHashMap<Integer,String>();
+//			
+//			for(Result tempResult:lresult)
+//			{
+//				if(tempResult.getPercentage()>32 && tempResult.getStudent().getClassName().equals(className))
+//				{
+//					//lstu.put(tempResult.getStudent().getStudentId(), tempResult.getStudent().getStudentName());
+////					System.out.println(tempResult.getStudent());
+////					System.out.println(tempResult.getStudent().getClass());
+//					lhm.put(tempResult.getStudent().getStudentId(), "Pass");
+//				}
+//				else if(tempResult.getPercentage()<32 && tempResult.getStudent().getClassName().equals(className))
+//				{
+//					//lstu.put(tempResult.getStudent().getStudentId(), tempResult.getStudent().getStudentName());
+//					lhm.put(tempResult.getStudent().getStudentId(), "Fail");
+//				}
+//				
+//			}
+//			
+//			return lhm;
+//		
+//		
+//	}
 
 	@Override
 	public Map<Integer, String> getClassResultOfAllStudent() {
@@ -235,6 +235,12 @@ public class ServiceImpl implements ServiceReq{
 
 	public void setTeacherRepository(TeacherRepository teacherRepository) {
 		this.teacherRepository = teacherRepository;
+	}
+
+	@Override
+	public Map<Integer, String> getClassResult(String className) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

@@ -17,20 +17,22 @@ public class Teacher {
 		// TODO Auto-generated constructor stub
 	}
 	public Teacher(String teacherUsername, int teacherId, String teacherName, String teacherPassword,
-			String studentMobile) {
+			String teacherMobile,String teacherSubjectName) {
 		super();
 		this.teacherUsername = teacherUsername;
 		this.teacherId = teacherId;
 		this.teacherName = teacherName;
 		this.teacherPassword = teacherPassword;
-		this.studentMobile = studentMobile;
+		this.teacherMobile = teacherMobile;
+		this.teacherSubjectName=teacherSubjectName;
 	}
 	@Id
 	private String teacherUsername;
 	private int teacherId;
 	private String teacherName;
 	private String teacherPassword;
-	private String studentMobile;
+	private String teacherMobile;
+	private String teacherSubjectName;
 	public String getTeacherUsername() {
 		return teacherUsername;
 	}
@@ -55,16 +57,24 @@ public class Teacher {
 	public void setTeacherPassword(String teacherPassword) {
 		this.teacherPassword = teacherPassword;
 	}
-	public String getStudentMobile() {
-		return studentMobile;
+	public String getTeacherMobile() {
+		return teacherMobile;
 	}
-	public void setStudentMobile(String studentMobile) {
-		this.studentMobile = studentMobile;
+	public void setTeacherMobile(String teacherMobile) {
+		this.teacherMobile = teacherMobile;
+	}
+	public String getTeacherSubjectName() {
+		return teacherSubjectName;
+	}
+	public void setTeacherSubjectName(String teacherSubjectName) {
+		this.teacherSubjectName = teacherSubjectName;
 	}
 	@Override
 	public String toString() {
 		return "Teacher [teacherUsername=" + teacherUsername + ", teacherId=" + teacherId + ", teacherName="
-				+ teacherName + ", teacherPassword=" + teacherPassword + ", studentMobile=" + studentMobile + "]";
+				+ teacherName + ", teacherPassword=" + teacherPassword + ", teacherMobile=" + teacherMobile
+				+ ", teacherSubjectName=" + teacherSubjectName + "]";
 	}
+	
 
 }
