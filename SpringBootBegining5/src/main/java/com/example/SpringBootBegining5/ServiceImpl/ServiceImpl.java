@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.SpringBootBegining5.Entity.Marks;
 import com.example.SpringBootBegining5.Entity.Result;
+import com.example.SpringBootBegining5.Entity.ResultDto;
 import com.example.SpringBootBegining5.Entity.Student;
 import com.example.SpringBootBegining5.Entity.StudentDto;
 import com.example.SpringBootBegining5.Entity.Teacher;
@@ -121,15 +122,19 @@ public class ServiceImpl implements ServiceReq{
 	}
 
 	@Override
-	public void saveResult(Result result,int studentId,int marksId) {
+	public void saveResult(ResultDto resultDto,int studentId,int marksId) {
 		Optional<Marks> tempMarks=marksRepository.findById(marksId);
 		Optional<Student> tempStudent=studentRepository.findById(studentId);
+		
+		Result result=new Result();
+		result.setResultId(resultDto.getResultId());
 		System.out.println(tempMarks.get());
 		System.out.println(tempStudent.get());
-		System.out.println(result.toString());
+		
 		result.setPercentage(tempMarks.get());
 		result.setMarks(tempMarks.get());
 		result.setStudent(tempStudent.get());
+		System.out.println(result.getPercentage());
 		resultRepository.save(result);
 		
 	}

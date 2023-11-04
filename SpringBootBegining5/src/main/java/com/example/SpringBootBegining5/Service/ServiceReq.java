@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import com.example.SpringBootBegining5.Entity.Marks;
 import com.example.SpringBootBegining5.Entity.Result;
+import com.example.SpringBootBegining5.Entity.ResultDto;
 import com.example.SpringBootBegining5.Entity.Student;
 import com.example.SpringBootBegining5.Entity.StudentDto;
 import com.example.SpringBootBegining5.Entity.Teacher;
@@ -29,7 +30,7 @@ public interface ServiceReq {
 	
 	public Result getResultByStudentId(int studentId);
 	
-	public void saveResult(Result result,int studentId,int marksId);
+	public void saveResult(ResultDto resultDto,int studentId,int marksId);
 	
 	public Map<Integer,String> getClassResultOfAllStudent();
 	

@@ -55,11 +55,8 @@ public class Result {
 		return percentage;
 	}
 	public void setPercentage(Marks marks) {
-		float sum=marks.getEnglish()+marks.getHindi()+marks.getMaths()+marks.getScience()+marks.getSst();
-		float d=sum/500;
-		
-		this.percentage = d*100;
-		
+		float sum=marks.getComputer()+marks.getEnglish()+marks.getHindi()+marks.getMaths()+marks.getScience()+marks.getSst();
+		this.percentage=sum/5;
 	}
 	
 	public void setPercentage(float percentage) {

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.SpringBootBegining5.Entity.Marks;
 import com.example.SpringBootBegining5.Entity.Result;
+import com.example.SpringBootBegining5.Entity.ResultDto;
 import com.example.SpringBootBegining5.Entity.Student;
 import com.example.SpringBootBegining5.Entity.StudentDto;
 import com.example.SpringBootBegining5.Entity.Teacher;
@@ -101,11 +102,11 @@ public class Controller {
 	}
 	
 	@PostMapping(value="/students/{studentId}/marks/{marksId}/resultEntity")
-	public ResponseEntity<String> saveResult(@RequestBody Result result,@PathVariable("studentId") int studentId,@PathVariable("marksId") int marksId) 
+	public ResponseEntity<String> saveResult(@RequestBody ResultDto resultDto,@PathVariable("studentId") int studentId,@PathVariable("marksId") int marksId) 
 	{
 		//System.out.println(result.getMarks().toString());
-		System.out.println(result.getPercentage());
-		serviceImpl.saveResult(result,studentId,marksId);
+//		System.out.println(result.getPercentage());
+		serviceImpl.saveResult(resultDto,studentId,marksId);
 		return new ResponseEntity<String>("Result Inserted", HttpStatus.OK);
 	}
 	
