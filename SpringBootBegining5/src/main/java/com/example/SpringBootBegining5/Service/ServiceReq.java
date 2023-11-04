@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import com.example.SpringBootBegining5.Entity.Marks;
 import com.example.SpringBootBegining5.Entity.Result;
 import com.example.SpringBootBegining5.Entity.Student;
+import com.example.SpringBootBegining5.Entity.StudentDto;
 import com.example.SpringBootBegining5.Entity.Teacher;
 
 public interface ServiceReq {
@@ -17,7 +18,7 @@ public interface ServiceReq {
 	public List<Student> getStudents();
 	
 	@Transactional
-	public void saveStudent(Student student);
+	public void saveStudent(StudentDto studentDto);
 	
 	public void deleteStudentById(int studentId);
 	

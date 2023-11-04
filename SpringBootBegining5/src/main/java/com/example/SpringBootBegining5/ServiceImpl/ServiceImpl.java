@@ -9,10 +9,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.SpringBootBegining5.Entity.Address;
 import com.example.SpringBootBegining5.Entity.Marks;
 import com.example.SpringBootBegining5.Entity.Result;
 import com.example.SpringBootBegining5.Entity.Student;
+import com.example.SpringBootBegining5.Entity.StudentDto;
 import com.example.SpringBootBegining5.Entity.Teacher;
 //import com.example.SpringBootBegining5.Repsitory.AddressRepository;
 import com.example.SpringBootBegining5.Repsitory.MarksRepository;
@@ -69,8 +69,19 @@ public class ServiceImpl implements ServiceReq{
 	}
 
 	@Override
-	public void saveStudent(Student student) {
+	public void saveStudent(StudentDto studentDto) {
+		Student student=new Student();
+		student.setAddress(studentDto.getAddress());
+		student.setResult(null);
+		student.setSchoolClass(null);
+		student.setStudentId(studentDto.getStudentId());
+		student.setStudentMobile(studentDto.getStudentMobile());
+		student.setStudentName(studentDto.getStudentName());
+		student.setStudentRoll(studentDto.getStudentRoll());
+		if(student.getResult()!=null)
+		{
 		student.getResult().setPercentage(student.getResult().getMarks());
+		}
 		studentRepository.save(student);
 	}
 

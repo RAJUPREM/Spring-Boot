@@ -26,9 +26,12 @@ public class Teacher {
 		this.teacherMobile = teacherMobile;
 		this.teacherSubjectName=teacherSubjectName;
 	}
+	
+	
 	@Id
-	private String teacherUsername;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int teacherId;
+	private String teacherUsername;
 	private String teacherName;
 	private String teacherPassword;
 	private String teacherMobile;
