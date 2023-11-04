@@ -134,6 +134,9 @@ public class ServiceImpl implements ServiceReq{
 		result.setPercentage(tempMarks.get());
 		result.setMarks(tempMarks.get());
 		result.setStudent(tempStudent.get());
+		Student student=tempStudent.get();
+		student.setResult(result);
+		studentRepository.save(student);
 		System.out.println(result.getPercentage());
 		resultRepository.save(result);
 		
