@@ -443,6 +443,52 @@ public class ServiceImpl implements ServiceReq{
 		this.schoolClassRepository = schoolClassRepository;
 	}
 
+	@Override
+	public List<SchoolClass> getSchoolClasses() {
+		List<SchoolClass> lschoolClass=schoolClassRepository.findAll();
+		return lschoolClass;
+	}
+
+	@Override
+	public List<Student> getAllStudentOfSchoolClasses(String schoolClassId) {
+			List<Student> lstudent=studentRepository.findAll();
+			
+			List<Student> lstud=new ArrayList<Student>();			
+			for(Student student:lstudent)
+			{
+				if(student.getSchoolClass()!=null)
+				{
+					if(student.getSchoolClass().getSchoolClassId().equals(schoolClassId))
+					{
+						lstud.add(student);
+					}
+				}
+			}
+			
+			
+		return lstud;
+	}
+
+	@Override
+	public List<Teacher> getAllTeacherOfSchoolClasses(String schoolClassId) {
+		List<Teacher> lteacher=teacherRepository.findAll();
+		
+		List<Teacher> lteach=new ArrayList<Teacher>();
+		
+		for(Teacher teacher:lteacher)
+		{
+			if(teacher.getSchoolClass()!=null)
+			{
+				if(teacher.getSchoolClass().getSchoolClassId().equals(schoolClassId))
+				{
+					lteach.add(teacher);			
+				}
+			}
+		}
+		
+		return lteach;
+	}
+
 	
 
 	

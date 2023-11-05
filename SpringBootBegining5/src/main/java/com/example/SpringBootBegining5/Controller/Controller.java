@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.SpringBootBegining5.Entity.Marks;
 import com.example.SpringBootBegining5.Entity.Result;
 import com.example.SpringBootBegining5.Entity.ResultDto;
+import com.example.SpringBootBegining5.Entity.SchoolClass;
 import com.example.SpringBootBegining5.Entity.SchoolClassDto;
 import com.example.SpringBootBegining5.Entity.Student;
 import com.example.SpringBootBegining5.Entity.StudentDto;
@@ -57,6 +58,27 @@ public class Controller {
 	{
 		List<Student> lstudent=serviceImpl.getStudents();
 		return new ResponseEntity<>(lstudent,HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/schoolClasses")
+	public ResponseEntity<List<SchoolClass>> getAllSchoolClass()
+	{
+		List<SchoolClass> lschoolClass=serviceImpl.getSchoolClasses();
+		return new ResponseEntity<>(lschoolClass,HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/schoolClasses/students/{schoolClassId}")
+	public ResponseEntity<List<Student>> getAllStudentOfSchoolClasses(@PathVariable("schoolClassId") String schoolClassId)
+	{
+		List<Student> lstu=serviceImpl.getAllStudentOfSchoolClasses(schoolClassId);
+		return new ResponseEntity<>(lstu, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/schoolClasses/teachers/{schoolClassId}")
+	public ResponseEntity<List<Teacher>> getAllTeacherOfSchoolClasses(@PathVariable("schoolClassId") String schoolClassId)
+	{
+		List<Teacher> lteach=serviceImpl.getAllTeacherOfSchoolClasses(schoolClassId);
+		return new ResponseEntity<>(lteach, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/teachers")
