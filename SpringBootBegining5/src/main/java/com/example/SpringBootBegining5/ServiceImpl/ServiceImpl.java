@@ -12,15 +12,21 @@ import org.springframework.stereotype.Service;
 import com.example.SpringBootBegining5.Entity.Marks;
 import com.example.SpringBootBegining5.Entity.Result;
 import com.example.SpringBootBegining5.Entity.ResultDto;
+import com.example.SpringBootBegining5.Entity.SchoolClass;
+import com.example.SpringBootBegining5.Entity.SchoolClassDto;
+import com.example.SpringBootBegining5.Entity.SchoolSubject;
 import com.example.SpringBootBegining5.Entity.Student;
 import com.example.SpringBootBegining5.Entity.StudentDto;
 import com.example.SpringBootBegining5.Entity.Teacher;
+import com.example.SpringBootBegining5.Entity.TeacherDto;
 //import com.example.SpringBootBegining5.Repsitory.AddressRepository;
 import com.example.SpringBootBegining5.Repsitory.MarksRepository;
 import com.example.SpringBootBegining5.Repsitory.ResultRepository;
+import com.example.SpringBootBegining5.Repsitory.SchoolClassRepository;
 import com.example.SpringBootBegining5.Repsitory.StudentRepository;
 import com.example.SpringBootBegining5.Repsitory.TeacherRepository;
 import com.example.SpringBootBegining5.Service.ServiceReq;
+import com.example.SpringBootBegining5.constraints.SubjectNameAccordingToClass;
 
 
 @Service
@@ -47,6 +53,9 @@ public class ServiceImpl implements ServiceReq{
 	
 	@Autowired
 	private ResultRepository resultRepository;
+	
+	@Autowired
+	private SchoolClassRepository schoolClassRepository;
 	
 	@Override
 	public Student getStudentById(int studentId) {
@@ -108,7 +117,14 @@ public class ServiceImpl implements ServiceReq{
 	
 	
 	@Override
-	public void saveTeacher(Teacher teacher) {
+	public void saveTeacher(TeacherDto teacherDto) {
+		Teacher teacher=new Teacher();
+		teacher.setTeacherId(teacherDto.getTeacherId());
+		teacher.setAddress(teacherDto.getAddress());
+		teacher.setTeacherMobile(teacherDto.getTeacherMobile());
+		teacher.setTeacherName(teacherDto.getTeacherName());
+		teacher.setTeacherSubjectName(teacherDto.getTeacherSubjectName());
+		teacher.setSchoolClass(null);
 		teacherRepository.save(teacher);
 	}
 	
@@ -260,6 +276,171 @@ public class ServiceImpl implements ServiceReq{
 	public Map<Integer, String> getClassResult(String className) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Teacher getTeacherById(int teacherId) {
+		Optional<Teacher> tempTeacher=teacherRepository.findById(teacherId);
+		Teacher teacher=tempTeacher.get();
+		return teacher;
+	}
+
+	@Override
+	public List<Teacher> getTeachers() {
+		List<Teacher> lteacher=teacherRepository.findAll();
+		return lteacher;
+	}
+	
+	public static SchoolSubject getSubject(String sub[])
+	{
+		SchoolSubject schoolSubjectTemp=new SchoolSubject();
+		
+		for(String tempSub:sub)
+		{
+			if(tempSub.equals("maths"))
+			{
+				schoolSubjectTemp.setMaths(true);
+			}
+			else if(tempSub.equals("hindi"))
+			{
+				schoolSubjectTemp.setHindi(true);
+			}
+			else if(tempSub.equals("english"))
+			{
+				schoolSubjectTemp.setEnglish(true);
+			}
+			else if(tempSub.equals("science"))
+			{
+				schoolSubjectTemp.setScience(true);
+			}
+			else if(tempSub.equals("sst"))
+			{
+				schoolSubjectTemp.setSst(true);
+			}
+			else if(tempSub.equals("computer"))
+			{
+				schoolSubjectTemp.setComputer(true);
+			}
+		}
+		
+		
+		return schoolSubjectTemp;
+	}
+
+	@Override
+	public void createSchoolClass(SchoolClassDto schoolClassDto) {
+		SchoolClass schoolClass=new SchoolClass();
+		
+		schoolClass.setSchoolClassSection(schoolClassDto.getSchoolClassSection());
+		schoolClass.setSchoolClassStandard(schoolClassDto.getSchoolClassStandard());
+		
+		schoolClass.setSchoolClassId();
+		
+		SchoolSubject schoolSubject=new SchoolSubject();
+		
+		if(schoolClassDto.getSchoolClassStandard().equals("one"))
+		{
+			String sub[]=SubjectNameAccordingToClass.one;
+			schoolSubject=getSubject(sub);
+		}
+		else if(schoolClassDto.getSchoolClassStandard().equals("two"))
+		{
+			String sub[]=SubjectNameAccordingToClass.two;
+			schoolSubject=getSubject(sub);
+		}
+		else if(schoolClassDto.getSchoolClassStandard().equals("three"))
+		{
+			String sub[]=SubjectNameAccordingToClass.three;
+			schoolSubject=getSubject(sub);
+		}
+		else if(schoolClassDto.getSchoolClassStandard().equals("four"))
+		{
+			String sub[]=SubjectNameAccordingToClass.four;
+			schoolSubject=getSubject(sub);
+		}
+		else if(schoolClassDto.getSchoolClassStandard().equals("five"))
+		{
+			String sub[]=SubjectNameAccordingToClass.five;
+			schoolSubject=getSubject(sub);
+		}
+		else if(schoolClassDto.getSchoolClassStandard().equals("six"))
+		{
+			String sub[]=SubjectNameAccordingToClass.six;
+			schoolSubject=getSubject(sub);
+		}
+		else if(schoolClassDto.getSchoolClassStandard().equals("seven"))
+		{
+			String sub[]=SubjectNameAccordingToClass.seven;
+			schoolSubject=getSubject(sub);
+		}
+		else if(schoolClassDto.getSchoolClassStandard().equals("eight"))
+		{
+			String sub[]=SubjectNameAccordingToClass.eight;
+			schoolSubject=getSubject(sub);
+		}
+		else if(schoolClassDto.getSchoolClassStandard().equals("nine"))
+		{
+			String sub[]=SubjectNameAccordingToClass.nine;
+			schoolSubject=getSubject(sub);
+		}
+		else if(schoolClassDto.getSchoolClassStandard().equals("ten"))
+		{
+			String sub[]=SubjectNameAccordingToClass.ten;
+			schoolSubject=getSubject(sub);
+		}
+		else if(schoolClassDto.getSchoolClassStandard().equals("eleven"))
+		{
+			String sub[]=SubjectNameAccordingToClass.eleven;
+			schoolSubject=getSubject(sub);
+		}
+		else if(schoolClassDto.getSchoolClassStandard().equals("twelve"))
+		{
+			String sub[]=SubjectNameAccordingToClass.twelve;
+			schoolSubject=getSubject(sub);
+		}
+		
+		schoolClass.setSchoolSubject(schoolSubject);
+		
+		//List<Student> lstudent=new ArrayList<Student>();
+		
+		int [] lstuId=schoolClassDto.getStudentId();
+		
+		for(int i=0;i<schoolClassDto.getStudentId().length;i++)
+		{
+			Optional<Student> tempStudent=studentRepository.findById(lstuId[i]);
+			//lstudent.add(tempStudent.get());
+			Student student=tempStudent.get();
+			student.setSchoolClass(schoolClass);
+			studentRepository.save(student);
+		}
+		
+		//schoolClass.setStudents(lstudent);
+		
+		//List<Teacher> lteacher=new ArrayList<Teacher>();
+		
+		int [] lteaId=schoolClassDto.getTeacherId();
+		
+		for(int i=0;i<schoolClassDto.getTeacherId().length;i++)
+		{
+			Optional<Teacher> tempTeacher=teacherRepository.findById(lteaId[i]);
+			Teacher teacher=tempTeacher.get();
+			teacher.setSchoolClass(schoolClass);
+			teacherRepository.save(teacher);
+			//lteacher.add(tempTeacher.get());
+		}
+		
+		//schoolClass.setTeachers(lteacher);
+		
+		//schoolClassRepository.save(schoolClass);
+		
+	}
+
+	public SchoolClassRepository getSchoolClassRepository() {
+		return schoolClassRepository;
+	}
+
+	public void setSchoolClassRepository(SchoolClassRepository schoolClassRepository) {
+		this.schoolClassRepository = schoolClassRepository;
 	}
 
 	

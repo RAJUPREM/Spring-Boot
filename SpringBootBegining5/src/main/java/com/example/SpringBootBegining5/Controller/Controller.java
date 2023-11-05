@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.SpringBootBegining5.Entity.Marks;
 import com.example.SpringBootBegining5.Entity.Result;
 import com.example.SpringBootBegining5.Entity.ResultDto;
+import com.example.SpringBootBegining5.Entity.SchoolClassDto;
 import com.example.SpringBootBegining5.Entity.Student;
 import com.example.SpringBootBegining5.Entity.StudentDto;
 import com.example.SpringBootBegining5.Entity.Teacher;
+import com.example.SpringBootBegining5.Entity.TeacherDto;
 import com.example.SpringBootBegining5.Repsitory.StudentRepository;
 import com.example.SpringBootBegining5.ServiceImpl.ServiceImpl;
 
@@ -55,6 +57,20 @@ public class Controller {
 	{
 		List<Student> lstudent=serviceImpl.getStudents();
 		return new ResponseEntity<>(lstudent,HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/teachers")
+	public ResponseEntity<List<Teacher>> getAllTeacher()
+	{
+		List<Teacher> lteacher=serviceImpl.getTeachers();
+		return new ResponseEntity<>(lteacher,HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/teachers/{teacherId}")
+	public ResponseEntity<Teacher> getTeacher(@PathVariable("teacherId") int teacherId)
+	{
+		Teacher teacher=serviceImpl.getTeacherById(teacherId);
+		return new ResponseEntity<>(teacher,HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/student/result/{id}")
@@ -94,11 +110,19 @@ public class Controller {
 	}
 	
 	@PostMapping(value="/teacherEntity")
-	public ResponseEntity<String> saveTeacher(@RequestBody Teacher teacher) 
+	public ResponseEntity<String> saveTeacher(@RequestBody TeacherDto teacherDto) 
 	{
-		System.out.println(teacher);
-		serviceImpl.saveTeacher(teacher);
+		System.out.println(teacherDto);
+		serviceImpl.saveTeacher(teacherDto);
 		return new ResponseEntity<String>("Teacher Inserted", HttpStatus.OK);
+	}
+	
+	@PostMapping(value="/schoolClassEntity")
+	public ResponseEntity<String> saveSchoolClass(@RequestBody SchoolClassDto schoolClassDto) 
+	{
+		System.out.println(schoolClassDto);
+		serviceImpl.createSchoolClass(schoolClassDto);
+		return new ResponseEntity<String>("School Class Inserted", HttpStatus.OK);
 	}
 	
 	@PostMapping(value="/students/{studentId}/marks/{marksId}/resultEntity")

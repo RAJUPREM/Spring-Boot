@@ -20,7 +20,7 @@ public class SchoolClass {
 	}
 
 
-	public SchoolClass(int schoolClassId, String schoolClassStandard, String schoolClassSection,
+	public SchoolClass(String schoolClassId, String schoolClassStandard, String schoolClassSection,
 			SchoolSubject schoolSubject, List<Student> students, List<Teacher> teachers) {
 		super();
 		this.schoolClassId = schoolClassId;
@@ -33,8 +33,8 @@ public class SchoolClass {
 
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int schoolClassId;
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private String schoolClassId;
 	private String schoolClassStandard;
 	private String schoolClassSection;
 	
@@ -47,17 +47,18 @@ public class SchoolClass {
 	private List<Student> students;
 	
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="schoolClass")
+	@JsonBackReference
 	private List<Teacher> teachers;
 
 
-	public int getSchoolClassId() {
+	public String getSchoolClassId() {
 		return schoolClassId;
 	}
 
 
-	public void setSchoolClassId(int schoolClassId) {
-		this.schoolClassId = schoolClassId;
+	public void setSchoolClassId() {
+		this.schoolClassId = this.getSchoolClassStandard()+"-"+this.getSchoolClassSection();
 	}
 
 

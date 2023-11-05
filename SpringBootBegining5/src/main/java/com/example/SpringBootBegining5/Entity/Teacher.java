@@ -1,9 +1,15 @@
 package com.example.SpringBootBegining5.Entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 //import com.example.SpringBootBegining5.Repsitory.TeacherRepository;
 //resource/pojo/entity/bean
@@ -12,36 +18,36 @@ import javax.persistence.Id;
 public class Teacher {
 	
 	
-	public Teacher() {
+	
+	public Teacher(int teacherId, String teacherName, Address address, String teacherMobile, String teacherSubjectName,
+			SchoolClass schoolClass) {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Teacher(String teacherUsername, int teacherId, String teacherName, String teacherPassword,
-			String teacherMobile,String teacherSubjectName) {
-		super();
-		this.teacherUsername = teacherUsername;
 		this.teacherId = teacherId;
 		this.teacherName = teacherName;
-		this.teacherPassword = teacherPassword;
+		this.address = address;
 		this.teacherMobile = teacherMobile;
-		this.teacherSubjectName=teacherSubjectName;
+		this.teacherSubjectName = teacherSubjectName;
+		this.schoolClass = schoolClass;
+	}
+	public Teacher() {
+		super();
 	}
 	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int teacherId;
-	private String teacherUsername;
 	private String teacherName;
-	private String teacherPassword;
+	@Embedded
+	private Address address;
 	private String teacherMobile;
 	private String teacherSubjectName;
-	public String getTeacherUsername() {
-		return teacherUsername;
-	}
-	public void setTeacherUsername(String teacherUsername) {
-		this.teacherUsername = teacherUsername;
-	}
+	
+	
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JsonManagedReference
+	private SchoolClass schoolClass;
+	
 	public int getTeacherId() {
 		return teacherId;
 	}
@@ -54,11 +60,11 @@ public class Teacher {
 	public void setTeacherName(String teacherName) {
 		this.teacherName = teacherName;
 	}
-	public String getTeacherPassword() {
-		return teacherPassword;
+	public Address getAddress() {
+		return address;
 	}
-	public void setTeacherPassword(String teacherPassword) {
-		this.teacherPassword = teacherPassword;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	public String getTeacherMobile() {
 		return teacherMobile;
@@ -72,12 +78,21 @@ public class Teacher {
 	public void setTeacherSubjectName(String teacherSubjectName) {
 		this.teacherSubjectName = teacherSubjectName;
 	}
+	public SchoolClass getSchoolClass() {
+		return schoolClass;
+	}
+	public void setSchoolClass(SchoolClass schoolClass) {
+		this.schoolClass = schoolClass;
+	}
 	@Override
 	public String toString() {
-		return "Teacher [teacherUsername=" + teacherUsername + ", teacherId=" + teacherId + ", teacherName="
-				+ teacherName + ", teacherPassword=" + teacherPassword + ", teacherMobile=" + teacherMobile
-				+ ", teacherSubjectName=" + teacherSubjectName + "]";
+		return "Teacher [teacherId=" + teacherId + ", teacherName=" + teacherName + ", address=" + address
+				+ ", teacherMobile=" + teacherMobile + ", teacherSubjectName=" + teacherSubjectName + ", schoolClass="
+				+ schoolClass + "]";
 	}
+	
+	
+	
 	
 
 }

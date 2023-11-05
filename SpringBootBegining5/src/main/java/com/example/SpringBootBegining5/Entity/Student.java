@@ -41,7 +41,7 @@ public class Student {
 	private String studentMobile;
 	
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JsonManagedReference
 	private SchoolClass schoolClass;
 	
